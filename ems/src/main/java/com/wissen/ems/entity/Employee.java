@@ -35,11 +35,13 @@ public class Employee {
 	@Column(nullable = false)
 	private String jobTitle;
 
-	// Many employees can belong to one department. The foreign key column name
+	// Many employees can belong to one department. Each employee must belong to a
+	// department except the CEO (The CEO oversees all departments and therefore
+	// technically they don't belong to any department). The foreign key column name
 	// is department_id and it references the id column (primary key) of the
 	// department table.
 	@ManyToOne
-	@JoinColumn(name = "department_id", referencedColumnName = "id", nullable = false)
+	@JoinColumn(name = "department_id", referencedColumnName = "id")
 	private Department department;
 
 	@Enumerated(EnumType.STRING)
