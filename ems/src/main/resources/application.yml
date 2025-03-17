@@ -1,3 +1,14 @@
 spring:
   application:
     name: employee-management-system
+
+  h2:
+    console:
+      enabled: true
+
+  datasource:
+    url: jdbc:h2:mem:emsdb
+    # Ideally, the username and password should not be exposed in code.
+    # We could add it as environment variables and reference it here.
+    username: sa
+    password: sa
