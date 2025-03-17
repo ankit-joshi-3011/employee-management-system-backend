@@ -9,3 +9,6 @@ spring:
     # We could add it as environment variables and reference it here.
     username: sa
     password: sa
+
+  jpa:
+    defer-datasource-initialization: true
