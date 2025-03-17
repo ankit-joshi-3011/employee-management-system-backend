@@ -65,6 +65,16 @@ public class Employee {
 5. Even though the CEO is an employee of the organization, they don't belong to a department. This is because they oversee all departments.
 6. When a new department is created, the CEO signs up as that department's head until they can find an employee who can take over that responsibility.
 
+## Steps required to run tests
+To run the JUnit tests included with the project, follow the below mentioned steps:
+ * Expand the ems project folder
+ * Navigate to the src/test/java folder
+ * Open the com.wissen.ems.repository package
+ * Double click on the DepartmentRepositoryTests.java class to open it
+ * Right click anywhere in the file
+ * Select the Run As -> JUnit Test option
+ * Once the tests run the output would be visible in the JUnit tab
+
 ## Steps required to create the application JAR:
 To create a JAR file for the application in Spring Tool Suite, follow the below mentioned steps:
  * Right click on the ems project folder
