@@ -36,10 +36,10 @@ public class Employee {
 	private String jobTitle;
 
 	// Many employees can belong to one department. The foreign key column name
-	// is department_id and it should reference the id column (primary key) of the
+	// is department_id and it references the id column (primary key) of the
 	// department table.
 	@ManyToOne
-	@JoinColumn(name = "department_id", nullable = false)
+	@JoinColumn(name = "department_id", referencedColumnName = "id", nullable = false)
 	private Department department;
 
 	@Enumerated(EnumType.STRING)
@@ -52,7 +52,7 @@ public class Employee {
 	// manager_id and it references the id column (primary key) of the employees
 	// table.
 	@ManyToOne
-	@JoinColumn(name = "manager_id")
+	@JoinColumn(name = "manager_id", referencedColumnName = "id")
 	private Employee manager;
 
 	// An employee who is a manager can have multiple direct reports. This
