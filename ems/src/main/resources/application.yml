@@ -12,3 +12,8 @@ spring:
     # We could add it as environment variables and reference it here.
     username: sa
     password: sa
+
+  jpa:
+   hibernate:
+      ddl-auto: update
+   show-sql: true
