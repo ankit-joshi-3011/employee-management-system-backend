@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/emsdb
+    # Ideally, the username and password should not be exposed in code.
+    # We could add it as environment variables and reference it here.
+    username: root
+    password: root
