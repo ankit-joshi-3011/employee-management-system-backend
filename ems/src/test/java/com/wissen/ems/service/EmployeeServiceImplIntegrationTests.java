@@ -71,7 +71,7 @@ public class EmployeeServiceImplIntegrationTests {
 	}
 
 	@Test
-	public void testCreateEmployeeWithNullName() {
+	public void testCreateRegularEmployeeWithNullName() {
 		RegularEmployeeDetailsDTO regularEmployeeDetailsDTO = new RegularEmployeeDetailsDTO();
 
 		regularEmployeeDetailsDTO.setName(null);
@@ -82,7 +82,7 @@ public class EmployeeServiceImplIntegrationTests {
 	}
 
 	@Test
-	public void testCreateEmployeeWithEmptyJobTitle() {
+	public void testCreateRegularEmployeeWithEmptyJobTitle() {
 		RegularEmployeeDetailsDTO regularEmployeeDetailsDTO = new RegularEmployeeDetailsDTO();
 
 		regularEmployeeDetailsDTO.setName("ZAB");
@@ -94,7 +94,7 @@ public class EmployeeServiceImplIntegrationTests {
 	}
 
 	@Test
-	public void testCreateEmployeeWithInvalidDepartment() {
+	public void testCreateRegularEmployeeWithInvalidDepartment() {
 		RegularEmployeeDetailsDTO regularEmployeeDetailsDTO = new RegularEmployeeDetailsDTO();
 
 		regularEmployeeDetailsDTO.setName("ZAB");
@@ -107,7 +107,7 @@ public class EmployeeServiceImplIntegrationTests {
 	}
 
 	@Test
-	public void testCreateEmployeeWithInvalidManager() {
+	public void testCreateRegularEmployeeWithInvalidManager() {
 		RegularEmployeeDetailsDTO regularEmployeeDetailsDTO = new RegularEmployeeDetailsDTO();
 
 		regularEmployeeDetailsDTO.setName("CDE");
