@@ -6,6 +6,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -13,6 +14,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wissen.ems.common.Constants;
@@ -78,10 +80,15 @@ public class EmployeeRestControllerUnitTests {
 
 		when(employeeService.save(any(EmployeeDetailsDTO.class))).thenReturn(newEmployee);
 
-		mockMvc.perform(post(Constants.EMPLOYEE_REST_API_BASE_URI_PATH)
+		MvcResult result = mockMvc.perform(post(Constants.EMPLOYEE_REST_API_BASE_URI_PATH)
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(new ObjectMapper().writeValueAsString(regularEmployeeDetailsDTO)))
 			.andExpect(status().isCreated())
-			.andExpect(header().exists(HttpHeaders.LOCATION));
+			.andExpect(header().exists(HttpHeaders.LOCATION))
+			.andReturn();
+
+		String locationHeaderValue = result.getResponse().getHeader(HttpHeaders.LOCATION);
+
+		AssertionsForClassTypes.assertThat(locationHeaderValue).contains(Constants.EMPLOYEE_REST_API_BASE_URI_PATH + "/" + newEmployeeId);
 	}
 }
