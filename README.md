@@ -68,6 +68,7 @@ public class Employee {
 4. Overseeing an entire department like Engineering or Product Management is a huge task. Therefore, the department heads of each department are different employees.
 5. Even though the CEO is an employee of the organization, they don't belong to a department. This is because they oversee all departments.
 6. When a new department is created, the CEO signs up as that department's head until they can find an employee who can take over that responsibility.
+7. A regular employee (an individual contributor who does not have any direct reports) cannot report to another regular employee or directly to the CEO.
 
 ## Steps required to run tests
 To run the JUnit tests included with the project, follow the below mentioned steps:
