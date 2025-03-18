@@ -59,7 +59,7 @@ public class RegularEmployeeCreator implements EmployeeCreator {
 		}
 
 		if (manager.getDepartment().getId() != department.getId()) {
-			throw new BusinessRuleViolationException("A regular employee cannot report to a manager in another department");
+			throw new BusinessRuleViolationException(Constants.EMPLOYEE_REPORTING_TO_MANAGER_IN_ANOTHER_DEPARTMENT_EXCEPTION_MESSAGE);
 		}
 
 		Employee newRegularEmployee = new Employee();
