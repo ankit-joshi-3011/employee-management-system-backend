@@ -45,8 +45,11 @@ public final class Utility {
 	public static RegularEmployeeDetailsDTO getRegularEmployeeDetailsDtoWithEmptyJobTitle() {
 		RegularEmployeeDetailsDTO regularEmployeeDetailsDTO = new RegularEmployeeDetailsDTO();
 
-		regularEmployeeDetailsDTO.setName("ZAB");
-		regularEmployeeDetailsDTO.setJobTitle("");
+		String newEmployeeName = "WXY";
+		regularEmployeeDetailsDTO.setName(newEmployeeName);
+
+		String newEmployeeJobTitle = "";
+		regularEmployeeDetailsDTO.setJobTitle(newEmployeeJobTitle);
 
 		return regularEmployeeDetailsDTO;
 	}
@@ -54,9 +57,14 @@ public final class Utility {
 	public static RegularEmployeeDetailsDTO getRegularEmployeeDetailsDtoWithInvalidDepartmentId() {
 		RegularEmployeeDetailsDTO regularEmployeeDetailsDTO = new RegularEmployeeDetailsDTO();
 
-		regularEmployeeDetailsDTO.setName("ZAB");
-		regularEmployeeDetailsDTO.setJobTitle("Marketing Manager");
-		regularEmployeeDetailsDTO.setDepartmentId(4);
+		String newEmployeeName = "ZAB";
+		regularEmployeeDetailsDTO.setName(newEmployeeName);
+
+		String newEmployeeJobTitle = "Marketing Manager";
+		regularEmployeeDetailsDTO.setJobTitle(newEmployeeJobTitle);
+
+		int nonExistentDepartmentId = 4;
+		regularEmployeeDetailsDTO.setDepartmentId(nonExistentDepartmentId);
 
 		return regularEmployeeDetailsDTO;
 	}
@@ -64,10 +72,17 @@ public final class Utility {
 	public static RegularEmployeeDetailsDTO getRegularEmployeeDetailsDtoWithInvalidManagerId() {
 		RegularEmployeeDetailsDTO regularEmployeeDetailsDTO = new RegularEmployeeDetailsDTO();
 
-		regularEmployeeDetailsDTO.setName("CDE");
-		regularEmployeeDetailsDTO.setJobTitle("Principal Software Engineer");
-		regularEmployeeDetailsDTO.setDepartmentId(1);
-		regularEmployeeDetailsDTO.setManagerId(20);
+		String newEmployeeName = "WXY";
+		regularEmployeeDetailsDTO.setName(newEmployeeName);
+
+		String newEmployeeJobTitle = "Financial Management Associate";
+		regularEmployeeDetailsDTO.setJobTitle(newEmployeeJobTitle);
+
+		int financeDepartmentId = 3;
+		regularEmployeeDetailsDTO.setDepartmentId(financeDepartmentId);
+
+		int nonExistentManagerId = 20;
+		regularEmployeeDetailsDTO.setManagerId(nonExistentManagerId);
 
 		return regularEmployeeDetailsDTO;
 	}
@@ -75,10 +90,17 @@ public final class Utility {
 	public static RegularEmployeeDetailsDTO getRegularEmployeeDetailsDtoWithEmployeeReportingToCeo() {
 		RegularEmployeeDetailsDTO regularEmployeeDetailsDTO = new RegularEmployeeDetailsDTO();
 
-		regularEmployeeDetailsDTO.setName("CDE");
-		regularEmployeeDetailsDTO.setJobTitle("Principal Software Engineer");
-		regularEmployeeDetailsDTO.setDepartmentId(1);
-		regularEmployeeDetailsDTO.setManagerId(1);
+		String newEmployeeName = "WXY";
+		regularEmployeeDetailsDTO.setName(newEmployeeName);
+
+		String newEmployeeJobTitle = "Financial Management Associate";
+		regularEmployeeDetailsDTO.setJobTitle(newEmployeeJobTitle);
+
+		int financeDepartmentId = 3;
+		regularEmployeeDetailsDTO.setDepartmentId(financeDepartmentId);
+
+		int ceoId = 1;
+		regularEmployeeDetailsDTO.setManagerId(ceoId);
 
 		return regularEmployeeDetailsDTO;
 	}
@@ -86,10 +108,17 @@ public final class Utility {
 	public static RegularEmployeeDetailsDTO getRegularEmployeeDetailsDtoWithEmployeeReportingToManagerInDifferentDepartment() {
 		RegularEmployeeDetailsDTO regularEmployeeDetailsDTO = new RegularEmployeeDetailsDTO();
 
-		regularEmployeeDetailsDTO.setName("CDE");
-		regularEmployeeDetailsDTO.setJobTitle("Principal Software Engineer");
-		regularEmployeeDetailsDTO.setDepartmentId(1);
-		regularEmployeeDetailsDTO.setManagerId(3);
+		String newEmployeeName = "WXY";
+		regularEmployeeDetailsDTO.setName(newEmployeeName);
+
+		String newEmployeeJobTitle = "Financial Management Associate";
+		regularEmployeeDetailsDTO.setJobTitle(newEmployeeJobTitle);
+
+		int financeDepartmentId = 3;
+		regularEmployeeDetailsDTO.setDepartmentId(financeDepartmentId);
+
+		int headOfEngineeringEmployeeId = 2;
+		regularEmployeeDetailsDTO.setManagerId(headOfEngineeringEmployeeId);
 
 		return regularEmployeeDetailsDTO;
 	}
