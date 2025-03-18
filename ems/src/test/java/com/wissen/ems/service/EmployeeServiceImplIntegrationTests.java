@@ -105,4 +105,18 @@ public class EmployeeServiceImplIntegrationTests {
 
 		AssertionsForClassTypes.assertThat(exception.getMessage()).isEqualTo(Constants.INVALID_DEPARTMENT_ID_EXCEPTION_MESSAGE);
 	}
+
+	@Test
+	public void testCreateEmployeeWithInvalidManager() {
+		RegularEmployeeDetailsDTO regularEmployeeDetailsDTO = new RegularEmployeeDetailsDTO();
+
+		regularEmployeeDetailsDTO.setName("CDE");
+		regularEmployeeDetailsDTO.setJobTitle("Principal Software Engineer");
+		regularEmployeeDetailsDTO.setDepartmentId(1);
+		regularEmployeeDetailsDTO.setManagerId(20);
+
+		BusinessRuleViolationException exception = assertThrows(BusinessRuleViolationException.class, () -> employeeService.save(regularEmployeeDetailsDTO));
+
+		AssertionsForClassTypes.assertThat(exception.getMessage()).isEqualTo(Constants.INVALID_MANAGER_ID_EXCEPTION_MESSAGE);
+	}
 }
