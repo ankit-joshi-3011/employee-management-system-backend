@@ -6,6 +6,7 @@ import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.wissen.ems.common.Constants;
@@ -16,8 +17,9 @@ import com.wissen.ems.entity.EmployeeType;
 import com.wissen.ems.entity.EmploymentStatus;
 import com.wissen.ems.exception.BusinessRuleViolationException;
 
-// Load the entire application context, so the real database & services are used
-@SpringBootTest
+// Start the full Spring Boot application but with a random port instead of the fixed
+// port 8080. Using a random port allows tests to run in parallel without port conflicts.
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 // Ensure that database changes are rolled back after each test execution
 @Transactional
 public class EmployeeServiceImplIntegrationTests {
