@@ -1,4 +1,4 @@
-## Steps to import the application code in Spring Tool Suite
+## Steps to import the application code in Spring Tool Suite:
 1. Clone this git repository.
 2. Open Spring Tool Suite.
 3. When asked to select a directory as workspace, select the folder in which this git repository was cloned.
@@ -85,11 +85,11 @@ public class Employee {
 11. Department heads will require the ID of the department to which they belong and the list of the IDs of the employees who report to them to be present in addition to the name and employee type.
 12. The CEO will not require anything to present except the name and employee type.
 
-## Limitations
+## Limitations:
 1. Ideally, a Spring profile switch should happen without modifying the application.yml file. This can eventually be done via an environment variable.
 2. Ideally, the user name, password to access a data store should not be exposed in code. They can eventually be read via environment variables.
 
-## Steps required to run tests
+## Steps required to run tests:
 To run the JUnit tests included with the project, follow the below mentioned steps:
  * Expand the ems project folder
  * Navigate to the src/test/java folder
