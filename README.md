@@ -42,6 +42,10 @@ public class Employee {
 	@JoinColumn(name = "department_id", referencedColumnName = "id")
 	private Department department;
 
+	@Enumerated(EnumType.STRING) // Store the employee type of an employee ('REGULAR', 'REGULAR_MANAGER', 'DEPARTMENT_HEAD', 'CEO') as a string
+	@Column(nullable = false) // The employee has to have a type
+	private EmployeeType type;
+
 	@Enumerated(EnumType.STRING) // Store the employment status of an employee ('ACTIVE', 'RETIRED', 'TERMINATED') as a string
 	@Column(nullable = false) // The employee has to have an employment status
 	private EmploymentStatus status;
