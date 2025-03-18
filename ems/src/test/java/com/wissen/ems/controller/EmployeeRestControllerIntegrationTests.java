@@ -168,4 +168,24 @@ public class EmployeeRestControllerIntegrationTests {
 
 		AssertionsForClassTypes.assertThat(responseBody).isEqualTo(Constants.REGULAR_EMPLOYEE_REPORTING_TO_REGULAR_EMPLOYEE_OR_CEO_EXCEPTION_MESSAGE);
 	}
+
+	@Test
+	public void testCreateRegularEmployeeReportingToManagerInOtherDepartment() throws Exception {
+		RegularEmployeeDetailsDTO regularEmployeeDetailsDTO = new RegularEmployeeDetailsDTO();
+
+		regularEmployeeDetailsDTO.setName("CDE");
+		regularEmployeeDetailsDTO.setJobTitle("Principal Software Engineer");
+		regularEmployeeDetailsDTO.setDepartmentId(1);
+		regularEmployeeDetailsDTO.setManagerId(3);
+
+		MvcResult result = mockMvc.perform(post(Constants.EMPLOYEE_REST_API_BASE_URI_PATH)
+			.contentType(MediaType.APPLICATION_JSON)
+			.content(new ObjectMapper().writeValueAsString(regularEmployeeDetailsDTO)))
+			.andExpect(status().isUnprocessableEntity())
+			.andReturn();
+
+		String responseBody = result.getResponse().getContentAsString();
+
+		AssertionsForClassTypes.assertThat(responseBody).isEqualTo(Constants.EMPLOYEE_REPORTING_TO_MANAGER_IN_ANOTHER_DEPARTMENT_EXCEPTION_MESSAGE);
+	}
 }
