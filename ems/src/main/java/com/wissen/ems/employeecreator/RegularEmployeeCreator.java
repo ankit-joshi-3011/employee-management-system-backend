@@ -50,7 +50,7 @@ public class RegularEmployeeCreator implements EmployeeCreator {
 			.orElseThrow(() -> new BusinessRuleViolationException(Constants.INVALID_DEPARTMENT_ID_EXCEPTION_MESSAGE));
 
 		Employee manager = employeeRepository.findById(regularEmployeeDetailsDTO.getManagerId())
-			.orElseThrow(() -> new BusinessRuleViolationException("A regular employee should report to an existing manager"));
+			.orElseThrow(() -> new BusinessRuleViolationException(Constants.INVALID_MANAGER_ID_EXCEPTION_MESSAGE));
 
 		EmployeeType managerType = manager.getType();
 
