@@ -10,8 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.wissen.ems.common.Constants;
-import com.wissen.ems.dto.EmployeeDetailsDTO;
 import com.wissen.ems.dto.RegularEmployeeDetailsDTO;
+import com.wissen.ems.dto.UnsupportedEmployeeDetailsDto;
 import com.wissen.ems.entity.Employee;
 import com.wissen.ems.entity.EmployeeType;
 import com.wissen.ems.entity.EmploymentStatus;
@@ -24,9 +24,6 @@ import com.wissen.ems.exception.BusinessRuleViolationException;
 @Transactional
 public class EmployeeServiceImplIntegrationTests {
 	private EmployeeServiceImpl employeeService;
-
-	private class UnsupportedEmployeeDetailsDto extends EmployeeDetailsDTO {
-	}
 
 	@Autowired
 	public EmployeeServiceImplIntegrationTests(EmployeeServiceImpl employeeService) {
