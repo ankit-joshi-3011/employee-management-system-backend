@@ -43,7 +43,7 @@ public class RegularEmployeeCreator implements EmployeeCreator {
 		String jobTitle = regularEmployeeDetailsDTO.getJobTitle();
 
 		if (jobTitle == null || jobTitle.isEmpty() || jobTitle.isBlank()) {
-			throw new IllegalArgumentException("Employee's job title cannot be null or empty");
+			throw new IllegalArgumentException(Constants.EMPLOYEE_JOB_TITLE_NULL_OR_EMPTY_EXCEPTION_MESSAGE);
 		}
 
 		Department department = departmentRepository.findById(regularEmployeeDetailsDTO.getDepartmentId())
