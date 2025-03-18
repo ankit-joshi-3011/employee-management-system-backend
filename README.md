@@ -75,6 +75,10 @@ public class Employee {
 11. Department heads will require the ID of the department to which they belong and the list of the IDs of the employees who report to them to be present in addition to the name and employee type.
 12. The CEO will not require anything to present except the name and employee type.
 
+## Limitations
+1. Ideally, a Spring profile switch should happen without modifying the application.yml file. This can eventually be done via an environment variable.
+2. Ideally, the user name, password to access a data store should not be exposed in code. They can eventually be read via environment variables.
+
 ## Steps required to run tests
 To run the JUnit tests included with the project, follow the below mentioned steps:
  * Expand the ems project folder
