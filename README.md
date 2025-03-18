@@ -119,3 +119,4 @@ To create a JAR file for the application in Spring Tool Suite, follow the below 
 ## Steps required to run the application JAR via the command-line:
 1. To use the development Spring profile (which uses the H2 in-memory database), run the following command: ```java -jar target\ems-0.0.1-SNAPSHOT.jar --spring.profiles.active=dev```
 2. To use the production Spring profile (which uses the MySQL database), run the following command: ```java -jar target\ems-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod```
+ * In both cases the application will be accessible on ```http://localhost:8080```
