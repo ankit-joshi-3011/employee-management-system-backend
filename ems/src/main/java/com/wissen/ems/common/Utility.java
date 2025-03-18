@@ -41,4 +41,13 @@ public final class Utility {
 
 		return regularEmployeeDetailsDTO;
 	}
+
+	public static RegularEmployeeDetailsDTO getRegularEmployeeDetailsDtoWithEmptyJobTitle() {
+		RegularEmployeeDetailsDTO regularEmployeeDetailsDTO = new RegularEmployeeDetailsDTO();
+
+		regularEmployeeDetailsDTO.setName("ZAB");
+		regularEmployeeDetailsDTO.setJobTitle("");
+
+		return regularEmployeeDetailsDTO;
+	}
 }

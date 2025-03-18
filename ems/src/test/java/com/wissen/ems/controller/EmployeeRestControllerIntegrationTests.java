@@ -77,10 +77,7 @@ public class EmployeeRestControllerIntegrationTests {
 
 	@Test
 	public void testCreateRegularEmployeeWithEmptyJobTitle() throws Exception {
-		RegularEmployeeDetailsDTO regularEmployeeDetailsDTO = new RegularEmployeeDetailsDTO();
-
-		regularEmployeeDetailsDTO.setName("ZAB");
-		regularEmployeeDetailsDTO.setJobTitle("");
+		RegularEmployeeDetailsDTO regularEmployeeDetailsDTO = Utility.getRegularEmployeeDetailsDtoWithEmptyJobTitle();
 
 		MvcResult result = performPostRequestAndExpectErrorStatus(regularEmployeeDetailsDTO, HttpStatus.BAD_REQUEST);
 
