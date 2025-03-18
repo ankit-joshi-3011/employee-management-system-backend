@@ -88,6 +88,7 @@ public class Employee {
 ## Limitations:
 1. Ideally, a Spring profile switch should happen without modifying the application.yml file. This can eventually be done via an environment variable.
 2. Ideally, the user name, password to access a data store should not be exposed in code. They can eventually be read via environment variables.
+3. Ideally, the front-end URL should not be hard coded. This can eventually be read via an environment variable.
 
 ## Steps required to run tests:
 To run the JUnit tests included with the project, follow the below mentioned steps:
