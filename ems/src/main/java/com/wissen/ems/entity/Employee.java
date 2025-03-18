@@ -46,6 +46,10 @@ public class Employee {
 
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
+	private EmployeeType type;
+
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
 	private EmploymentStatus status;
 
 	// Each employee will have a manager except the CEO (It is logically incorrect
