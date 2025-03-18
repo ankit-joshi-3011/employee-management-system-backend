@@ -2,6 +2,7 @@ package com.wissen.ems.employeecreator;
 
 import org.springframework.stereotype.Component;
 
+import com.wissen.ems.common.Constants;
 import com.wissen.ems.dto.EmployeeDetailsDTO;
 import com.wissen.ems.dto.RegularEmployeeDetailsDTO;
 import com.wissen.ems.entity.Department;
@@ -36,7 +37,7 @@ public class RegularEmployeeCreator implements EmployeeCreator {
 		String name = regularEmployeeDetailsDTO.getName();
 
 		if (name == null || name.isEmpty() || name.isBlank()) {
-			throw new IllegalArgumentException("Employee's name cannot be null or empty");
+			throw new IllegalArgumentException(Constants.EMPLOYEE_NAME_NULL_OR_EMPTY_EXCEPTION_MESSAGE);
 		}
 
 		String jobTitle = regularEmployeeDetailsDTO.getJobTitle();
