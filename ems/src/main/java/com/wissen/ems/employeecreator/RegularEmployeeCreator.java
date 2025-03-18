@@ -55,7 +55,7 @@ public class RegularEmployeeCreator implements EmployeeCreator {
 		EmployeeType managerType = manager.getType();
 
 		if (managerType == EmployeeType.REGULAR || managerType == EmployeeType.CEO) {
-			throw new BusinessRuleViolationException("A regular employee cannot report to another regular employee or directly to the CEO");
+			throw new BusinessRuleViolationException(Constants.REGULAR_EMPLOYEE_REPORTING_TO_REGULAR_EMPLOYEE_OR_CEO_EXCEPTION_MESSAGE);
 		}
 
 		if (manager.getDepartment().getId() != department.getId()) {
