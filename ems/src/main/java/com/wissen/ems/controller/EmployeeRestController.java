@@ -1,11 +1,13 @@
 package com.wissen.ems.controller;
 
-import org.springframework.http.HttpStatus;
+import java.net.URI;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.wissen.ems.common.Constants;
 import com.wissen.ems.dto.EmployeeDetailsDTO;
@@ -21,9 +23,14 @@ public class EmployeeRestController {
 	private EmployeeService employeeService;
 
 	@PostMapping
-	public ResponseEntity<Employee> createEmployee(@RequestBody EmployeeDetailsDTO employeeDetailsDTO) {
+	public ResponseEntity<Void> createEmployee(@RequestBody EmployeeDetailsDTO employeeDetailsDTO) {
 		Employee createdEmployee = employeeService.save(employeeDetailsDTO);
 
-		return ResponseEntity.status(HttpStatus.CREATED).body(createdEmployee);
+		URI createdEmployeeLocation = ServletUriComponentsBuilder.fromCurrentRequest()
+			.path("/{id}")
+			.buildAndExpand(createdEmployee.getId())
+			.toUri();
+
+		return ResponseEntity.created(createdEmployeeLocation).build();
 	}
 }
