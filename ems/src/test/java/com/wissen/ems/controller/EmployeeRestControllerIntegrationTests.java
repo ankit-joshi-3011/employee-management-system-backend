@@ -113,12 +113,7 @@ public class EmployeeRestControllerIntegrationTests {
 
 	@Test
 	public void testCreateRegularEmployeeReportingToManagerInOtherDepartment() throws Exception {
-		RegularEmployeeDetailsDTO regularEmployeeDetailsDTO = new RegularEmployeeDetailsDTO();
-
-		regularEmployeeDetailsDTO.setName("CDE");
-		regularEmployeeDetailsDTO.setJobTitle("Principal Software Engineer");
-		regularEmployeeDetailsDTO.setDepartmentId(1);
-		regularEmployeeDetailsDTO.setManagerId(3);
+		RegularEmployeeDetailsDTO regularEmployeeDetailsDTO = Utility.getRegularEmployeeDetailsDtoWithEmployeeReportingToManagerInDifferentDepartment();
 
 		MvcResult result = performPostRequestAndExpectErrorStatus(regularEmployeeDetailsDTO, HttpStatus.UNPROCESSABLE_ENTITY);
 

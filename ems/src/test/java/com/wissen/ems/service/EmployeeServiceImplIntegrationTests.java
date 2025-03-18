@@ -103,12 +103,7 @@ public class EmployeeServiceImplIntegrationTests {
 
 	@Test
 	public void testCreateRegularEmployeeReportingToManagerInOtherDepartment() {
-		RegularEmployeeDetailsDTO regularEmployeeDetailsDTO = new RegularEmployeeDetailsDTO();
-
-		regularEmployeeDetailsDTO.setName("CDE");
-		regularEmployeeDetailsDTO.setJobTitle("Principal Software Engineer");
-		regularEmployeeDetailsDTO.setDepartmentId(1);
-		regularEmployeeDetailsDTO.setManagerId(3);
+		RegularEmployeeDetailsDTO regularEmployeeDetailsDTO = Utility.getRegularEmployeeDetailsDtoWithEmployeeReportingToManagerInDifferentDepartment();
 
 		BusinessRuleViolationException exception = assertThrows(BusinessRuleViolationException.class, () -> employeeService.save(regularEmployeeDetailsDTO));
 
