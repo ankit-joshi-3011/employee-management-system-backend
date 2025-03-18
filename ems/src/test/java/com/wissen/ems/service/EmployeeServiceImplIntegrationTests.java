@@ -58,9 +58,7 @@ public class EmployeeServiceImplIntegrationTests {
 
 	@Test
 	public void testCreateRegularEmployeeWithNullName() {
-		RegularEmployeeDetailsDTO regularEmployeeDetailsDTO = new RegularEmployeeDetailsDTO();
-
-		regularEmployeeDetailsDTO.setName(null);
+		RegularEmployeeDetailsDTO regularEmployeeDetailsDTO = Utility.getRegularEmployeeDetailsDtoWithNullEmployeeName();
 
 		IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> employeeService.save(regularEmployeeDetailsDTO));
 

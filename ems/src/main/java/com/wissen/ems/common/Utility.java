@@ -33,4 +33,12 @@ public final class Utility {
 
 		return regularEmployeeDetailsDTO;
 	}
+
+	public static RegularEmployeeDetailsDTO getRegularEmployeeDetailsDtoWithNullEmployeeName() {
+		RegularEmployeeDetailsDTO regularEmployeeDetailsDTO = new RegularEmployeeDetailsDTO();
+
+		regularEmployeeDetailsDTO.setName(null);
+
+		return regularEmployeeDetailsDTO;
+	}
 }
