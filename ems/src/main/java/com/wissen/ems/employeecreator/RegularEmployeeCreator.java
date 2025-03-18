@@ -70,6 +70,6 @@ public class RegularEmployeeCreator implements EmployeeCreator {
 		newRegularEmployee.setStatus(EmploymentStatus.ACTIVE);
 		newRegularEmployee.setManager(manager);
 
-		return employeeRepository.save(newRegularEmployee);
+		return newRegularEmployee;
 	}
 }
