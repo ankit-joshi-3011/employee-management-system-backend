@@ -11,13 +11,16 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.ResultMatcher;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wissen.ems.common.Constants;
 import com.wissen.ems.common.Constants.ExceptionMessages;
+import com.wissen.ems.dto.EmployeeDetailsDTO;
 import com.wissen.ems.dto.RegularEmployeeDetailsDTO;
 import com.wissen.ems.dto.UnsupportedEmployeeDetailsDto;
 
@@ -82,15 +85,9 @@ public class EmployeeRestControllerIntegrationTests {
 
 		regularEmployeeDetailsDTO.setName(null);
 
-		MvcResult result = mockMvc.perform(post(Constants.EMPLOYEE_REST_API_BASE_URI_PATH)
-			.contentType(MediaType.APPLICATION_JSON)
-			.content(new ObjectMapper().writeValueAsString(regularEmployeeDetailsDTO)))
-			.andExpect(status().isBadRequest())
-			.andReturn();
+		MvcResult result = performPostRequestAndExpectErrorStatus(regularEmployeeDetailsDTO, HttpStatus.BAD_REQUEST);
 
-		String responseBody = result.getResponse().getContentAsString();
-
-		AssertionsForClassTypes.assertThat(responseBody).isEqualTo(ExceptionMessages.EMPLOYEE_NAME_NULL_OR_EMPTY);
+		assertResponseBodyContainsErrorMessage(result, ExceptionMessages.EMPLOYEE_NAME_NULL_OR_EMPTY);
 	}
 
 	@Test
@@ -100,15 +97,9 @@ public class EmployeeRestControllerIntegrationTests {
 		regularEmployeeDetailsDTO.setName("ZAB");
 		regularEmployeeDetailsDTO.setJobTitle("");
 
-		MvcResult result = mockMvc.perform(post(Constants.EMPLOYEE_REST_API_BASE_URI_PATH)
-			.contentType(MediaType.APPLICATION_JSON)
-			.content(new ObjectMapper().writeValueAsString(regularEmployeeDetailsDTO)))
-			.andExpect(status().isBadRequest())
-			.andReturn();
+		MvcResult result = performPostRequestAndExpectErrorStatus(regularEmployeeDetailsDTO, HttpStatus.BAD_REQUEST);
 
-		String responseBody = result.getResponse().getContentAsString();
-
-		AssertionsForClassTypes.assertThat(responseBody).isEqualTo(ExceptionMessages.EMPLOYEE_JOB_TITLE_NULL_OR_EMPTY);
+		assertResponseBodyContainsErrorMessage(result, ExceptionMessages.EMPLOYEE_JOB_TITLE_NULL_OR_EMPTY);
 	}
 
 	@Test
@@ -119,15 +110,9 @@ public class EmployeeRestControllerIntegrationTests {
 		regularEmployeeDetailsDTO.setJobTitle("Marketing Manager");
 		regularEmployeeDetailsDTO.setDepartmentId(4);
 
-		MvcResult result = mockMvc.perform(post(Constants.EMPLOYEE_REST_API_BASE_URI_PATH)
-			.contentType(MediaType.APPLICATION_JSON)
-			.content(new ObjectMapper().writeValueAsString(regularEmployeeDetailsDTO)))
-			.andExpect(status().isUnprocessableEntity())
-			.andReturn();
+		MvcResult result = performPostRequestAndExpectErrorStatus(regularEmployeeDetailsDTO, HttpStatus.UNPROCESSABLE_ENTITY);
 
-		String responseBody = result.getResponse().getContentAsString();
-
-		AssertionsForClassTypes.assertThat(responseBody).isEqualTo(ExceptionMessages.INVALID_DEPARTMENT_ID);
+		assertResponseBodyContainsErrorMessage(result, ExceptionMessages.INVALID_DEPARTMENT_ID);
 	}
 
 	@Test
@@ -139,15 +124,9 @@ public class EmployeeRestControllerIntegrationTests {
 		regularEmployeeDetailsDTO.setDepartmentId(1);
 		regularEmployeeDetailsDTO.setManagerId(20);
 
-		MvcResult result = mockMvc.perform(post(Constants.EMPLOYEE_REST_API_BASE_URI_PATH)
-			.contentType(MediaType.APPLICATION_JSON)
-			.content(new ObjectMapper().writeValueAsString(regularEmployeeDetailsDTO)))
-			.andExpect(status().isUnprocessableEntity())
-			.andReturn();
+		MvcResult result = performPostRequestAndExpectErrorStatus(regularEmployeeDetailsDTO, HttpStatus.UNPROCESSABLE_ENTITY);
 
-		String responseBody = result.getResponse().getContentAsString();
-
-		AssertionsForClassTypes.assertThat(responseBody).isEqualTo(ExceptionMessages.INVALID_MANAGER_ID);
+		assertResponseBodyContainsErrorMessage(result, ExceptionMessages.INVALID_MANAGER_ID);
 	}
 
 	@Test
@@ -159,15 +138,9 @@ public class EmployeeRestControllerIntegrationTests {
 		regularEmployeeDetailsDTO.setDepartmentId(1);
 		regularEmployeeDetailsDTO.setManagerId(1);
 
-		MvcResult result = mockMvc.perform(post(Constants.EMPLOYEE_REST_API_BASE_URI_PATH)
-			.contentType(MediaType.APPLICATION_JSON)
-			.content(new ObjectMapper().writeValueAsString(regularEmployeeDetailsDTO)))
-			.andExpect(status().isUnprocessableEntity())
-			.andReturn();
+		MvcResult result = performPostRequestAndExpectErrorStatus(regularEmployeeDetailsDTO, HttpStatus.UNPROCESSABLE_ENTITY);
 
-		String responseBody = result.getResponse().getContentAsString();
-
-		AssertionsForClassTypes.assertThat(responseBody).isEqualTo(ExceptionMessages.REGULAR_EMPLOYEE_REPORTING_TO_REGULAR_EMPLOYEE_OR_CEO);
+		assertResponseBodyContainsErrorMessage(result, ExceptionMessages.REGULAR_EMPLOYEE_REPORTING_TO_REGULAR_EMPLOYEE_OR_CEO);
 	}
 
 	@Test
@@ -179,14 +152,30 @@ public class EmployeeRestControllerIntegrationTests {
 		regularEmployeeDetailsDTO.setDepartmentId(1);
 		regularEmployeeDetailsDTO.setManagerId(3);
 
+		MvcResult result = performPostRequestAndExpectErrorStatus(regularEmployeeDetailsDTO, HttpStatus.UNPROCESSABLE_ENTITY);
+
+		assertResponseBodyContainsErrorMessage(result, ExceptionMessages.EMPLOYEE_REPORTING_TO_MANAGER_IN_ANOTHER_DEPARTMENT);
+	}
+
+	private MvcResult performPostRequestAndExpectErrorStatus(EmployeeDetailsDTO employeeDetailsDto, HttpStatus expectedErrorStatus) throws Exception {
+		ResultMatcher errorStatusResultMatcher = switch (expectedErrorStatus) {
+			case BAD_REQUEST -> status().isBadRequest();
+			case UNPROCESSABLE_ENTITY -> status().isUnprocessableEntity();
+			default -> throw new IllegalArgumentException("Unexpected value: " + expectedErrorStatus);
+		};
+
 		MvcResult result = mockMvc.perform(post(Constants.EMPLOYEE_REST_API_BASE_URI_PATH)
 			.contentType(MediaType.APPLICATION_JSON)
-			.content(new ObjectMapper().writeValueAsString(regularEmployeeDetailsDTO)))
-			.andExpect(status().isUnprocessableEntity())
+			.content(new ObjectMapper().writeValueAsString(employeeDetailsDto)))
+			.andExpect(errorStatusResultMatcher)
 			.andReturn();
 
+		return result;
+	}
+
+	private void assertResponseBodyContainsErrorMessage(MvcResult result, String errorMessage) throws Exception {
 		String responseBody = result.getResponse().getContentAsString();
 
-		AssertionsForClassTypes.assertThat(responseBody).isEqualTo(ExceptionMessages.EMPLOYEE_REPORTING_TO_MANAGER_IN_ANOTHER_DEPARTMENT);
+		AssertionsForClassTypes.assertThat(responseBody).isEqualTo(errorMessage);
 	}
 }
