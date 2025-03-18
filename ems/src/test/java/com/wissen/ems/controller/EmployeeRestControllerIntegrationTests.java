@@ -74,4 +74,21 @@ public class EmployeeRestControllerIntegrationTests {
 			.content(new ObjectMapper().writeValueAsString(unsupportedEmployeeDetailsDTO)))
 			.andExpect(status().isBadRequest());
 	}
+
+	@Test
+	public void testCreateRegularEmployeeWithNullName() throws Exception {
+		RegularEmployeeDetailsDTO regularEmployeeDetailsDTO = new RegularEmployeeDetailsDTO();
+
+		regularEmployeeDetailsDTO.setName(null);
+
+		MvcResult result = mockMvc.perform(post(Constants.EMPLOYEE_REST_API_BASE_URI_PATH)
+			.contentType(MediaType.APPLICATION_JSON)
+			.content(new ObjectMapper().writeValueAsString(regularEmployeeDetailsDTO)))
+			.andExpect(status().isBadRequest())
+			.andReturn();
+
+		String responseBody = result.getResponse().getContentAsString();
+
+		AssertionsForClassTypes.assertThat(responseBody).isEqualTo(Constants.EMPLOYEE_NAME_NULL_OR_EMPTY_EXCEPTION_MESSAGE);
+	}
 }
