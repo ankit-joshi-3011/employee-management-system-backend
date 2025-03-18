@@ -109,4 +109,23 @@ public class EmployeeRestControllerIntegrationTests {
 
 		AssertionsForClassTypes.assertThat(responseBody).isEqualTo(Constants.EMPLOYEE_JOB_TITLE_NULL_OR_EMPTY_EXCEPTION_MESSAGE);
 	}
+
+	@Test
+	public void testCreateRegularEmployeeWithInvalidDepartment() throws Exception {
+		RegularEmployeeDetailsDTO regularEmployeeDetailsDTO = new RegularEmployeeDetailsDTO();
+
+		regularEmployeeDetailsDTO.setName("ZAB");
+		regularEmployeeDetailsDTO.setJobTitle("Marketing Manager");
+		regularEmployeeDetailsDTO.setDepartmentId(4);
+
+		MvcResult result = mockMvc.perform(post(Constants.EMPLOYEE_REST_API_BASE_URI_PATH)
+			.contentType(MediaType.APPLICATION_JSON)
+			.content(new ObjectMapper().writeValueAsString(regularEmployeeDetailsDTO)))
+			.andExpect(status().isUnprocessableEntity())
+			.andReturn();
+
+		String responseBody = result.getResponse().getContentAsString();
+
+		AssertionsForClassTypes.assertThat(responseBody).isEqualTo(Constants.INVALID_DEPARTMENT_ID_EXCEPTION_MESSAGE);
+	}
 }
