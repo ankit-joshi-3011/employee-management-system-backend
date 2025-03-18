@@ -1,3 +1,13 @@
+## Steps to import the application code in Spring Tool Suite
+1. Clone this git repository.
+2. Open Spring Tool Suite.
+3. When asked to select a directory as workspace, select the folder in which this git repository was cloned.
+4. Navigate to File -> Import...
+5. Search for the Existing Maven Projects option and select it.
+6. For the Root Directory of the application, browse to the ems folder within the folder in which this git repository was cloned.
+7. In the Projects section of the dialog, ensure that the application's pom.xml file is checked.
+8. Click on the Finish button to finish the import of the application.
+
 ## Assumptions:
 1. The following code describes the Department entity. The purpose of each annotation and attribute is described in the comment associated with it:
 ```
