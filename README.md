@@ -78,7 +78,9 @@ To run the JUnit tests included with the project, follow the below mentioned ste
  * Right click anywhere in the file
  * Select the Run As -> JUnit Test option
  * Once the tests run the output would be visible in the JUnit tab
- * Similar steps can be used to run the following classes: EmployeeRepositoryTests.java
+ * Similar steps can be used to run the following test classes:
+   * EmployeeManagementSystemApplicationTests.java
+   * EmployeeRepositoryTests.java
 
 ## Steps required to create the application JAR:
 To create a JAR file for the application in Spring Tool Suite, follow the below mentioned steps:
