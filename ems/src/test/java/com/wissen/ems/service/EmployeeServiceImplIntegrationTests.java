@@ -133,4 +133,18 @@ public class EmployeeServiceImplIntegrationTests {
 
 		AssertionsForClassTypes.assertThat(exception.getMessage()).isEqualTo(Constants.REGULAR_EMPLOYEE_REPORTING_TO_REGULAR_EMPLOYEE_OR_CEO_EXCEPTION_MESSAGE);
 	}
+
+	@Test
+	public void testCreateRegularEmployeeReportingToManagerInOtherDepartment() {
+		RegularEmployeeDetailsDTO regularEmployeeDetailsDTO = new RegularEmployeeDetailsDTO();
+
+		regularEmployeeDetailsDTO.setName("CDE");
+		regularEmployeeDetailsDTO.setJobTitle("Principal Software Engineer");
+		regularEmployeeDetailsDTO.setDepartmentId(1);
+		regularEmployeeDetailsDTO.setManagerId(3);
+
+		BusinessRuleViolationException exception = assertThrows(BusinessRuleViolationException.class, () -> employeeService.save(regularEmployeeDetailsDTO));
+
+		AssertionsForClassTypes.assertThat(exception.getMessage()).isEqualTo(Constants.EMPLOYEE_REPORTING_TO_MANAGER_IN_ANOTHER_DEPARTMENT_EXCEPTION_MESSAGE);
+	}
 }
