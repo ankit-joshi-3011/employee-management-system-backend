@@ -48,7 +48,6 @@ public class DepartmentRepositoryTests {
 	@Test
 	public void testUpdateNameOfHrDepartment() {
 		int idOfDepartmentToUpdate = 2;
-
 		Department departmentToUpdate = entityManager.find(Department.class, idOfDepartmentToUpdate);
 
 		String updatedDepartmentName = "Marketing";
@@ -62,7 +61,6 @@ public class DepartmentRepositoryTests {
 	@Test
 	public void testDeleteFinanceDepartment() {
 		int financeDepartmentId = 3;
-
 		departmentRepository.deleteById(financeDepartmentId);
 
 		Department finance = entityManager.find(Department.class, financeDepartmentId);
