@@ -50,4 +50,14 @@ public final class Utility {
 
 		return regularEmployeeDetailsDTO;
 	}
+
+	public static RegularEmployeeDetailsDTO getRegularEmployeeDetailsDtoWithInvalidDepartmentId() {
+		RegularEmployeeDetailsDTO regularEmployeeDetailsDTO = new RegularEmployeeDetailsDTO();
+
+		regularEmployeeDetailsDTO.setName("ZAB");
+		regularEmployeeDetailsDTO.setJobTitle("Marketing Manager");
+		regularEmployeeDetailsDTO.setDepartmentId(4);
+
+		return regularEmployeeDetailsDTO;
+	}
 }

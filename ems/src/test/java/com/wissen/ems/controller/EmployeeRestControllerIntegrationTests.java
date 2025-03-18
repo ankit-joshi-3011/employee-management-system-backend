@@ -86,11 +86,7 @@ public class EmployeeRestControllerIntegrationTests {
 
 	@Test
 	public void testCreateRegularEmployeeWithInvalidDepartment() throws Exception {
-		RegularEmployeeDetailsDTO regularEmployeeDetailsDTO = new RegularEmployeeDetailsDTO();
-
-		regularEmployeeDetailsDTO.setName("ZAB");
-		regularEmployeeDetailsDTO.setJobTitle("Marketing Manager");
-		regularEmployeeDetailsDTO.setDepartmentId(4);
+		RegularEmployeeDetailsDTO regularEmployeeDetailsDTO = Utility.getRegularEmployeeDetailsDtoWithInvalidDepartmentId();
 
 		MvcResult result = performPostRequestAndExpectErrorStatus(regularEmployeeDetailsDTO, HttpStatus.UNPROCESSABLE_ENTITY);
 
