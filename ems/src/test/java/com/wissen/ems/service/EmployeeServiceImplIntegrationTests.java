@@ -1,11 +1,15 @@
 package com.wissen.ems.service;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.wissen.ems.common.Constants;
+import com.wissen.ems.dto.EmployeeDetailsDTO;
 import com.wissen.ems.dto.RegularEmployeeDetailsDTO;
 import com.wissen.ems.entity.Employee;
 import com.wissen.ems.entity.EmployeeType;
@@ -17,6 +21,9 @@ import com.wissen.ems.entity.EmploymentStatus;
 @Transactional
 public class EmployeeServiceImplIntegrationTests {
 	private EmployeeServiceImpl employeeService;
+
+	private class UnsupportedEmployeeDetailsDto extends EmployeeDetailsDTO {
+	}
 
 	@Autowired
 	public EmployeeServiceImplIntegrationTests(EmployeeServiceImpl employeeService) {
@@ -51,5 +58,14 @@ public class EmployeeServiceImplIntegrationTests {
 		AssertionsForClassTypes.assertThat(createdEmployee.getStatus()).isEqualTo(EmploymentStatus.ACTIVE);
 		AssertionsForClassTypes.assertThat(createdEmployee.getManager().getId()).isEqualTo(financeManagerEmployeeId);
 		AssertionsForClassTypes.assertThat(createdEmployee.getDirectReports()).isNull();
+	}
+
+	@Test
+	public void testCreateEmployeeWithUnsupportedType() {
+		UnsupportedEmployeeDetailsDto unsupportedEmployeeDetailsDTO = new UnsupportedEmployeeDetailsDto();
+
+		IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> employeeService.save(unsupportedEmployeeDetailsDTO));
+
+		AssertionsForClassTypes.assertThat(exception.getMessage()).isEqualTo(Constants.UNSUPPORTED_EMPLOYEE_TYPE_EXCEPTION_MESSAGE);
 	}
 }
