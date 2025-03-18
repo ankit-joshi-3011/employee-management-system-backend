@@ -18,6 +18,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wissen.ems.common.Constants;
 import com.wissen.ems.dto.RegularEmployeeDetailsDTO;
+import com.wissen.ems.dto.UnsupportedEmployeeDetailsDto;
 
 import jakarta.transaction.Transactional;
 
@@ -62,5 +63,15 @@ public class EmployeeRestControllerIntegrationTests {
 		String locationHeaderValue = result.getResponse().getHeader(HttpHeaders.LOCATION);
 
 		AssertionsForClassTypes.assertThat(locationHeaderValue).contains(Constants.EMPLOYEE_REST_API_BASE_URI_PATH);
+	}
+
+	@Test
+	public void testCreateEmployeeWithUnsupportedType() throws Exception {
+		UnsupportedEmployeeDetailsDto unsupportedEmployeeDetailsDTO = new UnsupportedEmployeeDetailsDto();
+
+		mockMvc.perform(post(Constants.EMPLOYEE_REST_API_BASE_URI_PATH)
+			.contentType(MediaType.APPLICATION_JSON)
+			.content(new ObjectMapper().writeValueAsString(unsupportedEmployeeDetailsDTO)))
+			.andExpect(status().isBadRequest());
 	}
 }
