@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.wissen.ems.common.Constants;
+import com.wissen.ems.common.Constants.ExceptionMessages;
 import com.wissen.ems.dto.RegularEmployeeDetailsDTO;
 import com.wissen.ems.dto.UnsupportedEmployeeDetailsDto;
 import com.wissen.ems.entity.Employee;
@@ -66,7 +66,7 @@ public class EmployeeServiceImplIntegrationTests {
 
 		IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> employeeService.save(unsupportedEmployeeDetailsDTO));
 
-		AssertionsForClassTypes.assertThat(exception.getMessage()).isEqualTo(Constants.UNSUPPORTED_EMPLOYEE_TYPE_EXCEPTION_MESSAGE);
+		AssertionsForClassTypes.assertThat(exception.getMessage()).isEqualTo(ExceptionMessages.UNSUPPORTED_EMPLOYEE_TYPE);
 	}
 
 	@Test
@@ -77,7 +77,7 @@ public class EmployeeServiceImplIntegrationTests {
 
 		IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> employeeService.save(regularEmployeeDetailsDTO));
 
-		AssertionsForClassTypes.assertThat(exception.getMessage()).isEqualTo(Constants.EMPLOYEE_NAME_NULL_OR_EMPTY_EXCEPTION_MESSAGE);
+		AssertionsForClassTypes.assertThat(exception.getMessage()).isEqualTo(ExceptionMessages.EMPLOYEE_NAME_NULL_OR_EMPTY);
 	}
 
 	@Test
@@ -89,7 +89,7 @@ public class EmployeeServiceImplIntegrationTests {
 
 		IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> employeeService.save(regularEmployeeDetailsDTO));
 
-		AssertionsForClassTypes.assertThat(exception.getMessage()).isEqualTo(Constants.EMPLOYEE_JOB_TITLE_NULL_OR_EMPTY_EXCEPTION_MESSAGE);
+		AssertionsForClassTypes.assertThat(exception.getMessage()).isEqualTo(ExceptionMessages.EMPLOYEE_JOB_TITLE_NULL_OR_EMPTY);
 	}
 
 	@Test
@@ -102,7 +102,7 @@ public class EmployeeServiceImplIntegrationTests {
 
 		BusinessRuleViolationException exception = assertThrows(BusinessRuleViolationException.class, () -> employeeService.save(regularEmployeeDetailsDTO));
 
-		AssertionsForClassTypes.assertThat(exception.getMessage()).isEqualTo(Constants.INVALID_DEPARTMENT_ID_EXCEPTION_MESSAGE);
+		AssertionsForClassTypes.assertThat(exception.getMessage()).isEqualTo(ExceptionMessages.INVALID_DEPARTMENT_ID);
 	}
 
 	@Test
@@ -116,7 +116,7 @@ public class EmployeeServiceImplIntegrationTests {
 
 		BusinessRuleViolationException exception = assertThrows(BusinessRuleViolationException.class, () -> employeeService.save(regularEmployeeDetailsDTO));
 
-		AssertionsForClassTypes.assertThat(exception.getMessage()).isEqualTo(Constants.INVALID_MANAGER_ID_EXCEPTION_MESSAGE);
+		AssertionsForClassTypes.assertThat(exception.getMessage()).isEqualTo(ExceptionMessages.INVALID_MANAGER_ID);
 	}
 
 	@Test
@@ -130,7 +130,7 @@ public class EmployeeServiceImplIntegrationTests {
 
 		BusinessRuleViolationException exception = assertThrows(BusinessRuleViolationException.class, () -> employeeService.save(regularEmployeeDetailsDTO));
 
-		AssertionsForClassTypes.assertThat(exception.getMessage()).isEqualTo(Constants.REGULAR_EMPLOYEE_REPORTING_TO_REGULAR_EMPLOYEE_OR_CEO_EXCEPTION_MESSAGE);
+		AssertionsForClassTypes.assertThat(exception.getMessage()).isEqualTo(ExceptionMessages.REGULAR_EMPLOYEE_REPORTING_TO_REGULAR_EMPLOYEE_OR_CEO);
 	}
 
 	@Test
@@ -144,6 +144,6 @@ public class EmployeeServiceImplIntegrationTests {
 
 		BusinessRuleViolationException exception = assertThrows(BusinessRuleViolationException.class, () -> employeeService.save(regularEmployeeDetailsDTO));
 
-		AssertionsForClassTypes.assertThat(exception.getMessage()).isEqualTo(Constants.EMPLOYEE_REPORTING_TO_MANAGER_IN_ANOTHER_DEPARTMENT_EXCEPTION_MESSAGE);
+		AssertionsForClassTypes.assertThat(exception.getMessage()).isEqualTo(ExceptionMessages.EMPLOYEE_REPORTING_TO_MANAGER_IN_ANOTHER_DEPARTMENT);
 	}
 }

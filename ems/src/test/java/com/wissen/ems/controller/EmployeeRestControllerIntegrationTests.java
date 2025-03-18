@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.MvcResult;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wissen.ems.common.Constants;
+import com.wissen.ems.common.Constants.ExceptionMessages;
 import com.wissen.ems.dto.RegularEmployeeDetailsDTO;
 import com.wissen.ems.dto.UnsupportedEmployeeDetailsDto;
 
@@ -89,7 +90,7 @@ public class EmployeeRestControllerIntegrationTests {
 
 		String responseBody = result.getResponse().getContentAsString();
 
-		AssertionsForClassTypes.assertThat(responseBody).isEqualTo(Constants.EMPLOYEE_NAME_NULL_OR_EMPTY_EXCEPTION_MESSAGE);
+		AssertionsForClassTypes.assertThat(responseBody).isEqualTo(ExceptionMessages.EMPLOYEE_NAME_NULL_OR_EMPTY);
 	}
 
 	@Test
@@ -107,7 +108,7 @@ public class EmployeeRestControllerIntegrationTests {
 
 		String responseBody = result.getResponse().getContentAsString();
 
-		AssertionsForClassTypes.assertThat(responseBody).isEqualTo(Constants.EMPLOYEE_JOB_TITLE_NULL_OR_EMPTY_EXCEPTION_MESSAGE);
+		AssertionsForClassTypes.assertThat(responseBody).isEqualTo(ExceptionMessages.EMPLOYEE_JOB_TITLE_NULL_OR_EMPTY);
 	}
 
 	@Test
@@ -126,7 +127,7 @@ public class EmployeeRestControllerIntegrationTests {
 
 		String responseBody = result.getResponse().getContentAsString();
 
-		AssertionsForClassTypes.assertThat(responseBody).isEqualTo(Constants.INVALID_DEPARTMENT_ID_EXCEPTION_MESSAGE);
+		AssertionsForClassTypes.assertThat(responseBody).isEqualTo(ExceptionMessages.INVALID_DEPARTMENT_ID);
 	}
 
 	@Test
@@ -146,7 +147,7 @@ public class EmployeeRestControllerIntegrationTests {
 
 		String responseBody = result.getResponse().getContentAsString();
 
-		AssertionsForClassTypes.assertThat(responseBody).isEqualTo(Constants.INVALID_MANAGER_ID_EXCEPTION_MESSAGE);
+		AssertionsForClassTypes.assertThat(responseBody).isEqualTo(ExceptionMessages.INVALID_MANAGER_ID);
 	}
 
 	@Test
@@ -166,7 +167,7 @@ public class EmployeeRestControllerIntegrationTests {
 
 		String responseBody = result.getResponse().getContentAsString();
 
-		AssertionsForClassTypes.assertThat(responseBody).isEqualTo(Constants.REGULAR_EMPLOYEE_REPORTING_TO_REGULAR_EMPLOYEE_OR_CEO_EXCEPTION_MESSAGE);
+		AssertionsForClassTypes.assertThat(responseBody).isEqualTo(ExceptionMessages.REGULAR_EMPLOYEE_REPORTING_TO_REGULAR_EMPLOYEE_OR_CEO);
 	}
 
 	@Test
@@ -186,6 +187,6 @@ public class EmployeeRestControllerIntegrationTests {
 
 		String responseBody = result.getResponse().getContentAsString();
 
-		AssertionsForClassTypes.assertThat(responseBody).isEqualTo(Constants.EMPLOYEE_REPORTING_TO_MANAGER_IN_ANOTHER_DEPARTMENT_EXCEPTION_MESSAGE);
+		AssertionsForClassTypes.assertThat(responseBody).isEqualTo(ExceptionMessages.EMPLOYEE_REPORTING_TO_MANAGER_IN_ANOTHER_DEPARTMENT);
 	}
 }
