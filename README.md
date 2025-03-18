@@ -69,6 +69,11 @@ public class Employee {
 5. Even though the CEO is an employee of the organization, they don't belong to a department. This is because they oversee all departments.
 6. When a new department is created, the CEO signs up as that department's head until they can find an employee who can take over that responsibility.
 7. A regular employee (an individual contributor who does not have any direct reports) cannot report to another regular employee or directly to the CEO.
+8. All employees will require the name and employee type to be present.
+9. Regular employees will require the job title, ID of the department to which they belong, and the ID of their manager to be present in addition to the name and employee type.
+10. Regular managers (managers who are not department heads or the CEO) will require the job title, ID of the department to which they belong, ID of their manager, and the list of the IDs of the employees who report to them to be present in addition to the name and employee type.
+11. Department heads will require the ID of the department to which they belong and the list of the IDs of the employees who report to them to be present in addition to the name and employee type.
+12. The CEO will not require anything to present except the name and employee type.
 
 ## Steps required to run tests
 To run the JUnit tests included with the project, follow the below mentioned steps:
