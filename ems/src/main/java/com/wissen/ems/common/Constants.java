@@ -10,7 +10,7 @@ public final class Constants {
 
 		public static final String UNSUPPORTED_EMPLOYEE_TYPE = "Unsupported employee type";
 		public static final String EMPLOYEE_NAME_NULL_OR_EMPTY = "Employee's name cannot be null or empty";
-		public static final String EMPLOYEE_JOB_TITLE_NULL_OR_EMPTY = "Employee's job title cannot be null or empty";
+		public static final String EMPLOYEE_JOB_TITLE_NULL_OR_EMPTY = "A regular employee's job title cannot be null or empty";
 		public static final String INVALID_DEPARTMENT_ID = "A regular employee should belong to an existing department";
 		public static final String INVALID_MANAGER_ID = "A regular employee should report to an existing manager";
 		public static final String REGULAR_EMPLOYEE_REPORTING_TO_REGULAR_EMPLOYEE_OR_CEO = "A regular employee cannot report to another regular employee or directly to the CEO";
