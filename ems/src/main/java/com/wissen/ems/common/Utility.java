@@ -14,7 +14,7 @@ public final class Utility {
 		return input;
 	}
 
-	public static RegularEmployeeDetailsDTO getRegularEmployeeDetailsDTO() {
+	public static RegularEmployeeDetailsDTO getValidRegularEmployeeDetailsDto() {
 		RegularEmployeeDetailsDTO regularEmployeeDetailsDTO = new RegularEmployeeDetailsDTO();
 
 		String newEmployeeName = "WXY";

@@ -42,7 +42,7 @@ public class EmployeeRestControllerIntegrationTests {
 
 	@Test
 	public void testCreateRegularEmployeeSuccessfully() throws Exception {
-		RegularEmployeeDetailsDTO regularEmployeeDetailsDTO = Utility.getRegularEmployeeDetailsDTO();
+		RegularEmployeeDetailsDTO regularEmployeeDetailsDTO = Utility.getValidRegularEmployeeDetailsDto();
 
 		MvcResult result = mockMvc.perform(post(Constants.EMPLOYEE_REST_API_BASE_URI_PATH)
 			.contentType(MediaType.APPLICATION_JSON)

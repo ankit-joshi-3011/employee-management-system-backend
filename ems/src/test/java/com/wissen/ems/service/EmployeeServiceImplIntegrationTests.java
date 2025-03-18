@@ -33,7 +33,7 @@ public class EmployeeServiceImplIntegrationTests {
 
 	@Test
 	public void testCreateRegularEmployeeSuccessfully() {
-		RegularEmployeeDetailsDTO regularEmployeeDetailsDTO = Utility.getRegularEmployeeDetailsDTO();
+		RegularEmployeeDetailsDTO regularEmployeeDetailsDTO = Utility.getValidRegularEmployeeDetailsDto();
 
 		Employee createdEmployee = employeeService.save(regularEmployeeDetailsDTO);
 
