@@ -1,0 +1,5 @@
+{"properties": [{
+  "name": "frontend-url",
+  "type": "java.lang.String",
+  "description": "The URL at which the front-end of the Employee Management System application is accessible"
+}]}

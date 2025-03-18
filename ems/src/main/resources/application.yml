@@ -11,3 +11,7 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+
+# Ideally, the front-end URL should not be hard coded.
+# We could add it as an environment variable and reference it here.
+frontend-url: http://localhost:3000
