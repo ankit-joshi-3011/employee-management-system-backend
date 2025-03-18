@@ -88,6 +88,7 @@ To run the JUnit tests included with the project, follow the below mentioned ste
    * EmployeeManagementSystemApplicationTests.java
    * EmployeeRestControllerIntegrationTests.java
    * EmployeeRestControllerUnitTests.java
+   * DepartmentRepositoryTests.java
    * EmployeeRepositoryTests.java
 
 ## Steps required to create the application JAR:
