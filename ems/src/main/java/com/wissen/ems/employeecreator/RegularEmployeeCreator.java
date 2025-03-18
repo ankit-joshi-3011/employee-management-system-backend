@@ -3,6 +3,7 @@ package com.wissen.ems.employeecreator;
 import org.springframework.stereotype.Component;
 
 import com.wissen.ems.common.Constants.ExceptionMessages;
+import com.wissen.ems.common.Utility;
 import com.wissen.ems.dto.EmployeeDetailsDTO;
 import com.wissen.ems.dto.RegularEmployeeDetailsDTO;
 import com.wissen.ems.entity.Department;
@@ -34,17 +35,9 @@ public class RegularEmployeeCreator implements EmployeeCreator {
 
 		RegularEmployeeDetailsDTO regularEmployeeDetailsDTO = (RegularEmployeeDetailsDTO) employeeDetailsDto;
 
-		String name = regularEmployeeDetailsDTO.getName();
+		String name = Utility.assertNonNullEmptyOrBlank(regularEmployeeDetailsDTO.getName(), ExceptionMessages.EMPLOYEE_NAME_NULL_OR_EMPTY);
 
-		if (name == null || name.isEmpty() || name.isBlank()) {
-			throw new IllegalArgumentException(ExceptionMessages.EMPLOYEE_NAME_NULL_OR_EMPTY);
-		}
-
-		String jobTitle = regularEmployeeDetailsDTO.getJobTitle();
-
-		if (jobTitle == null || jobTitle.isEmpty() || jobTitle.isBlank()) {
-			throw new IllegalArgumentException(ExceptionMessages.EMPLOYEE_JOB_TITLE_NULL_OR_EMPTY);
-		}
+		String jobTitle = Utility.assertNonNullEmptyOrBlank(regularEmployeeDetailsDTO.getJobTitle(), ExceptionMessages.EMPLOYEE_JOB_TITLE_NULL_OR_EMPTY);
 
 		Department department = departmentRepository.findById(regularEmployeeDetailsDTO.getDepartmentId())
 			.orElseThrow(() -> new BusinessRuleViolationException(ExceptionMessages.INVALID_DEPARTMENT_ID));
