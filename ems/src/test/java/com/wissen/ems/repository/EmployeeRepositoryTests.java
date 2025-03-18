@@ -10,6 +10,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
 import com.wissen.ems.entity.Department;
 import com.wissen.ems.entity.Employee;
+import com.wissen.ems.entity.EmployeeType;
 import com.wissen.ems.entity.EmploymentStatus;
 
 @DataJpaTest
@@ -27,18 +28,19 @@ public class EmployeeRepositoryTests {
 	public void createNewEmployee() {
 		Employee newEmployee = new Employee();
 
-		newEmployee.setName("ABC");
+		newEmployee.setName("NOP");
 		newEmployee.setJobTitle("Senior Software Engineer");
 
 		int engineeringDepartmentId = 1;
 		Department engineering = entityManager.find(Department.class, engineeringDepartmentId);
 		newEmployee.setDepartment(engineering);
 
+		newEmployee.setType(EmployeeType.REGULAR);
 		newEmployee.setStatus(EmploymentStatus.ACTIVE);
 
-		int headOfEngineeringEmployeeId = 2;
-		Employee headOfEngineering = entityManager.find(Employee.class, headOfEngineeringEmployeeId);
-		newEmployee.setManager(headOfEngineering);
+		int softwareEngineeringManagerEmployeeId = 5;
+		Employee softwareEngineeringManager = entityManager.find(Employee.class, softwareEngineeringManagerEmployeeId);
+		newEmployee.setManager(softwareEngineeringManager);
 
 		newEmployee = employeeRepository.save(newEmployee);
 
@@ -55,11 +57,10 @@ public class EmployeeRepositoryTests {
 
 	@Test
 	public void updateNameOfFinanceAnalyst() {
-		int financeAnalystEmployeeId = 9;
-
+		int financeAnalystEmployeeId = 12;
 		Employee financeAnalyst = entityManager.find(Employee.class, financeAnalystEmployeeId);
 
-		String financeAnalystUpdatedName = "BCD";
+		String financeAnalystUpdatedName = "QRS";
 		financeAnalyst.setName(financeAnalystUpdatedName);
 
 		financeAnalyst = employeeRepository.save(financeAnalyst);
@@ -69,8 +70,7 @@ public class EmployeeRepositoryTests {
 
 	@Test
 	public void deleteHrCoordinator() {
-		int hrCoordinatorEmployeeId = 8;
-
+		int hrCoordinatorEmployeeId = 10;
 		employeeRepository.deleteById(hrCoordinatorEmployeeId);
 
 		Employee hrCoordinator = entityManager.find(Employee.class, hrCoordinatorEmployeeId);
