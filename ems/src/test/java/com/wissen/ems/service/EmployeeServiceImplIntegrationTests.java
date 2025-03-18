@@ -94,12 +94,7 @@ public class EmployeeServiceImplIntegrationTests {
 
 	@Test
 	public void testCreateRegularEmployeeReportingDirectlyToTheCeo() {
-		RegularEmployeeDetailsDTO regularEmployeeDetailsDTO = new RegularEmployeeDetailsDTO();
-
-		regularEmployeeDetailsDTO.setName("CDE");
-		regularEmployeeDetailsDTO.setJobTitle("Principal Software Engineer");
-		regularEmployeeDetailsDTO.setDepartmentId(1);
-		regularEmployeeDetailsDTO.setManagerId(1);
+		RegularEmployeeDetailsDTO regularEmployeeDetailsDTO = Utility.getRegularEmployeeDetailsDtoWithEmployeeReportingToCeo();
 
 		BusinessRuleViolationException exception = assertThrows(BusinessRuleViolationException.class, () -> employeeService.save(regularEmployeeDetailsDTO));
 

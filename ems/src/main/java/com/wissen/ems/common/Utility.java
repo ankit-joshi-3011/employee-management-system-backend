@@ -71,4 +71,15 @@ public final class Utility {
 
 		return regularEmployeeDetailsDTO;
 	}
+
+	public static RegularEmployeeDetailsDTO getRegularEmployeeDetailsDtoWithEmployeeReportingToCeo() {
+		RegularEmployeeDetailsDTO regularEmployeeDetailsDTO = new RegularEmployeeDetailsDTO();
+
+		regularEmployeeDetailsDTO.setName("CDE");
+		regularEmployeeDetailsDTO.setJobTitle("Principal Software Engineer");
+		regularEmployeeDetailsDTO.setDepartmentId(1);
+		regularEmployeeDetailsDTO.setManagerId(1);
+
+		return regularEmployeeDetailsDTO;
+	}
 }
