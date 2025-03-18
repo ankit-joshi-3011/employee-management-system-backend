@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.wissen.ems.common.Constants.ExceptionMessages;
+import com.wissen.ems.common.Utility;
 import com.wissen.ems.dto.RegularEmployeeDetailsDTO;
 import com.wissen.ems.dto.UnsupportedEmployeeDetailsDto;
 import com.wissen.ems.entity.Employee;
@@ -32,31 +33,17 @@ public class EmployeeServiceImplIntegrationTests {
 
 	@Test
 	public void testCreateRegularEmployeeSuccessfully() {
-		RegularEmployeeDetailsDTO regularEmployeeDetailsDTO = new RegularEmployeeDetailsDTO();
-
-		String newEmployeeName = "WXY";
-		regularEmployeeDetailsDTO.setName(newEmployeeName);
-
-		String newEmployeeJobTitle = "Financial Management Associate";
-		regularEmployeeDetailsDTO.setJobTitle(newEmployeeJobTitle);
-
-		int financeDepartmentId = 3;
-		regularEmployeeDetailsDTO.setDepartmentId(financeDepartmentId);
-
-		regularEmployeeDetailsDTO.setEmployeeType("REGULAR");
-
-		int financeManagerEmployeeId = 11;
-		regularEmployeeDetailsDTO.setManagerId(financeManagerEmployeeId);
+		RegularEmployeeDetailsDTO regularEmployeeDetailsDTO = Utility.getRegularEmployeeDetailsDTO();
 
 		Employee createdEmployee = employeeService.save(regularEmployeeDetailsDTO);
 
 		AssertionsForClassTypes.assertThat(createdEmployee.getId()).isGreaterThan(0);
-		AssertionsForClassTypes.assertThat(createdEmployee.getName()).isEqualTo(newEmployeeName);
-		AssertionsForClassTypes.assertThat(createdEmployee.getJobTitle()).isEqualTo(newEmployeeJobTitle);
-		AssertionsForClassTypes.assertThat(createdEmployee.getDepartment().getId()).isEqualTo(financeDepartmentId);
+		AssertionsForClassTypes.assertThat(createdEmployee.getName()).isEqualTo(regularEmployeeDetailsDTO.getName());
+		AssertionsForClassTypes.assertThat(createdEmployee.getJobTitle()).isEqualTo(regularEmployeeDetailsDTO.getJobTitle());
+		AssertionsForClassTypes.assertThat(createdEmployee.getDepartment().getId()).isEqualTo(regularEmployeeDetailsDTO.getDepartmentId());
 		AssertionsForClassTypes.assertThat(createdEmployee.getType()).isEqualTo(EmployeeType.REGULAR);
 		AssertionsForClassTypes.assertThat(createdEmployee.getStatus()).isEqualTo(EmploymentStatus.ACTIVE);
-		AssertionsForClassTypes.assertThat(createdEmployee.getManager().getId()).isEqualTo(financeManagerEmployeeId);
+		AssertionsForClassTypes.assertThat(createdEmployee.getManager().getId()).isEqualTo(regularEmployeeDetailsDTO.getManagerId());
 		AssertionsForClassTypes.assertThat(createdEmployee.getDirectReports()).isNull();
 	}
 

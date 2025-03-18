@@ -20,6 +20,7 @@ import org.springframework.test.web.servlet.ResultMatcher;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wissen.ems.common.Constants;
 import com.wissen.ems.common.Constants.ExceptionMessages;
+import com.wissen.ems.common.Utility;
 import com.wissen.ems.dto.EmployeeDetailsDTO;
 import com.wissen.ems.dto.RegularEmployeeDetailsDTO;
 import com.wissen.ems.dto.UnsupportedEmployeeDetailsDto;
@@ -41,21 +42,7 @@ public class EmployeeRestControllerIntegrationTests {
 
 	@Test
 	public void testCreateRegularEmployeeSuccessfully() throws Exception {
-		RegularEmployeeDetailsDTO regularEmployeeDetailsDTO = new RegularEmployeeDetailsDTO();
-
-		String newEmployeeName = "ABC";
-		regularEmployeeDetailsDTO.setName(newEmployeeName);
-
-		String newEmployeeJobTitle = "Financial Management Associate";
-		regularEmployeeDetailsDTO.setJobTitle(newEmployeeJobTitle);
-
-		int financeDepartmentId = 3;
-		regularEmployeeDetailsDTO.setDepartmentId(financeDepartmentId);
-
-		regularEmployeeDetailsDTO.setEmployeeType("REGULAR");
-
-		int financeManagerEmployeeId = 11;
-		regularEmployeeDetailsDTO.setManagerId(financeManagerEmployeeId);
+		RegularEmployeeDetailsDTO regularEmployeeDetailsDTO = Utility.getRegularEmployeeDetailsDTO();
 
 		MvcResult result = mockMvc.perform(post(Constants.EMPLOYEE_REST_API_BASE_URI_PATH)
 			.contentType(MediaType.APPLICATION_JSON)

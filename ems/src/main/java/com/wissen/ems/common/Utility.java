@@ -1,5 +1,7 @@
 package com.wissen.ems.common;
 
+import com.wissen.ems.dto.RegularEmployeeDetailsDTO;
+
 public final class Utility {
 	private Utility() {
 	}
@@ -10,5 +12,25 @@ public final class Utility {
 		}
 
 		return input;
+	}
+
+	public static RegularEmployeeDetailsDTO getRegularEmployeeDetailsDTO() {
+		RegularEmployeeDetailsDTO regularEmployeeDetailsDTO = new RegularEmployeeDetailsDTO();
+
+		String newEmployeeName = "WXY";
+		regularEmployeeDetailsDTO.setName(newEmployeeName);
+
+		String newEmployeeJobTitle = "Financial Management Associate";
+		regularEmployeeDetailsDTO.setJobTitle(newEmployeeJobTitle);
+
+		int financeDepartmentId = 3;
+		regularEmployeeDetailsDTO.setDepartmentId(financeDepartmentId);
+
+		regularEmployeeDetailsDTO.setEmployeeType("REGULAR");
+
+		int financeManagerEmployeeId = 11;
+		regularEmployeeDetailsDTO.setManagerId(financeManagerEmployeeId);
+
+		return regularEmployeeDetailsDTO;
 	}
 }
