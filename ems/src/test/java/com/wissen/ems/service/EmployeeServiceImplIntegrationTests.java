@@ -14,6 +14,7 @@ import com.wissen.ems.dto.RegularEmployeeDetailsDTO;
 import com.wissen.ems.entity.Employee;
 import com.wissen.ems.entity.EmployeeType;
 import com.wissen.ems.entity.EmploymentStatus;
+import com.wissen.ems.exception.BusinessRuleViolationException;
 
 // Load the entire application context, so the real database & services are used
 @SpringBootTest
@@ -90,5 +91,18 @@ public class EmployeeServiceImplIntegrationTests {
 		IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> employeeService.save(regularEmployeeDetailsDTO));
 
 		AssertionsForClassTypes.assertThat(exception.getMessage()).isEqualTo(Constants.EMPLOYEE_JOB_TITLE_NULL_OR_EMPTY_EXCEPTION_MESSAGE);
+	}
+
+	@Test
+	public void testCreateEmployeeWithInvalidDepartment() {
+		RegularEmployeeDetailsDTO regularEmployeeDetailsDTO = new RegularEmployeeDetailsDTO();
+
+		regularEmployeeDetailsDTO.setName("ZAB");
+		regularEmployeeDetailsDTO.setJobTitle("Marketing Manager");
+		regularEmployeeDetailsDTO.setDepartmentId(4);
+
+		BusinessRuleViolationException exception = assertThrows(BusinessRuleViolationException.class, () -> employeeService.save(regularEmployeeDetailsDTO));
+
+		AssertionsForClassTypes.assertThat(exception.getMessage()).isEqualTo(Constants.INVALID_DEPARTMENT_ID_EXCEPTION_MESSAGE);
 	}
 }
