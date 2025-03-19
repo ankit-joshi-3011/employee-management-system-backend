@@ -15,10 +15,10 @@ public class CorsConfiguration {
 	private EmployeeManagementSystemConfigurationProperties configurationProperties;
 
 	// WebMvcConfigurer allows us to customize the default Spring MVC configuration.
-	// We need to modify the CORS settings to allow the front-end to be able to
-	// access the back-end. Without this modification, the browser will block the
-	// front-end from making API requests to the back-end due to the Same-Origin
-	// Policy.
+	// We need to modify the CORS (Cross-Origin Resource Sharing) settings to allow
+	// the front-end to be able to access the back-end. Without this modification,
+	// the browser will block the front-end from making API requests to the back-end
+	// due to the Same-Origin Policy.
 	@Bean
 	WebMvcConfigurer corsConfigurer() {
 		return new WebMvcConfigurer() {
