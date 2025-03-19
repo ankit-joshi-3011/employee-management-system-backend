@@ -82,12 +82,20 @@ public class EmployeeServiceImplUnitTests {
 	@Test
 	public void testGetActiveManagersByDepartment() {
 		Employee headOfEngineering = new Employee();
+
 		int headOfEngineeringEmployeeId = 2;
 		headOfEngineering.setId(headOfEngineeringEmployeeId);
 
+		String headOfEngineeringName = "DEF";
+		headOfEngineering.setName(headOfEngineeringName);
+
 		Employee softwareEngineeringManager = new Employee();
+
 		int softwareEngineeringManagerEmployeeId = 5;
 		softwareEngineeringManager.setId(softwareEngineeringManagerEmployeeId);
+
+		String softwareEngineeringManagerName = "MNO";
+		softwareEngineeringManager.setName(softwareEngineeringManagerName);
 
 		List<Employee> activeEngineeringManagers = List.of(headOfEngineering, softwareEngineeringManager);
 
