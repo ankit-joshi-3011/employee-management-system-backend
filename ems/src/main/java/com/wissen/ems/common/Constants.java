@@ -20,4 +20,5 @@ public final class Constants {
 	public static final String REST_API_BASE_URI_PATH = "/api";
 	public static final String EMPLOYEE_REST_API_BASE_URI_PATH = REST_API_BASE_URI_PATH + "/employees";
 	public static final String DEPARTMENT_REST_API_BASE_URI_PATH = REST_API_BASE_URI_PATH + "/departments";
+	public static final String RETRIEVE_ACTIVE_MANAGERS_BY_DEPARTMENT_API_URI_PATH = EMPLOYEE_REST_API_BASE_URI_PATH + "/managers";
 }
