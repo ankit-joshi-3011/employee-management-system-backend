@@ -24,9 +24,9 @@ public class CorsConfiguration {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping(Constants.EMPLOYEE_REST_API_BASE_URI_PATH)
+				registry.addMapping(Constants.REST_API_BASE_URI_PATH + "/**")
 					.allowedOrigins(configurationProperties.getFrontendUrl())
-					.allowedMethods("POST")
+					.allowedMethods("POST", "GET")
 					.allowedHeaders("*");
 			}
 		};
