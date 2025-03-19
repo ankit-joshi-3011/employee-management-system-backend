@@ -1,5 +1,7 @@
 package com.wissen.ems.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.wissen.ems.common.Constants.ExceptionMessages;
@@ -25,5 +27,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 		Employee newEmployee = employeeCreator.create(employeeDetailsDTO);
 
 		return employeeRepository.save(newEmployee);
+	}
+
+	@Override
+	public List<Employee> getActiveManagersByDepartment(int departmentId) {
+		return employeeRepository.findActiveManagersByDepartment(departmentId);
 	}
 }
