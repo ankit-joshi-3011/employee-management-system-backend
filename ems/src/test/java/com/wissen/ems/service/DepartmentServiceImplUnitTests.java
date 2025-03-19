@@ -5,13 +5,13 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.wissen.ems.common.TestUtility;
 import com.wissen.ems.dto.DepartmentDetailsDTO;
 import com.wissen.ems.entity.Department;
 import com.wissen.ems.repository.DepartmentRepository;
@@ -43,13 +43,6 @@ public class DepartmentServiceImplUnitTests {
 
 		List<DepartmentDetailsDTO> allDepartmentDetailsDto = departmentService.getAllDepartments();
 
-		AssertionsForClassTypes.assertThat(allDepartmentDetailsDto.size()).isEqualTo(allDepartments.size());
-
-		for (int i = 0; i < allDepartmentDetailsDto.size(); i++) {
-			DepartmentDetailsDTO departmentDetailsDto = allDepartmentDetailsDto.get(i);
-
-			AssertionsForClassTypes.assertThat(departmentDetailsDto.getId()).isEqualTo(departmentIds[i]);
-			AssertionsForClassTypes.assertThat(departmentDetailsDto.getName()).isEqualTo(departmentNames[i]);
-		}
+		TestUtility.assertDepartmentDetailsDtosAreCorrect(allDepartmentDetailsDto);
 	}
 }
