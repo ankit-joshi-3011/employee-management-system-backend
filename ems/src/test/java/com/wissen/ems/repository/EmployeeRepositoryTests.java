@@ -1,5 +1,6 @@
 package com.wissen.ems.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.assertj.core.api.AssertionsForClassTypes;
@@ -76,5 +77,14 @@ public class EmployeeRepositoryTests {
 		Employee hrCoordinator = entityManager.find(Employee.class, hrCoordinatorEmployeeId);
 
 		AssertionsForClassTypes.assertThat(hrCoordinator).isNull();
+	}
+
+	@Test
+	public void testFindActiveManagersByDepartment() {
+		int engineeringDepartmentId = 1;
+
+		List<Employee> activeEngineeringManagers = employeeRepository.findActiveManagersByDepartment(engineeringDepartmentId);
+
+		AssertionsForClassTypes.assertThat(activeEngineeringManagers.size()).isEqualTo(2);
 	}
 }
