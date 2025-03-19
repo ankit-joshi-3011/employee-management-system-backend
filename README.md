@@ -104,8 +104,9 @@ To run the JUnit tests included with the project, follow the below mentioned ste
    * EmployeeRestControllerIntegrationTests.java
    * EmployeeRestControllerUnitTests.java
    * EmployeeRepositoryTests.java
-   * EmployeeServiceImplUnitTests.java
+   * DepartmentServiceImplUnitTests.java
    * EmployeeServiceImplIntegrationTests.java
+   * EmployeeServiceImplUnitTests.java
 
 ## Steps required to create the application JAR:
 To create a JAR file for the application in Spring Tool Suite, follow the below mentioned steps:
