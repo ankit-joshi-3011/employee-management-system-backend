@@ -17,5 +17,7 @@ public final class Constants {
 		public static final String EMPLOYEE_REPORTING_TO_MANAGER_IN_ANOTHER_DEPARTMENT = "A regular employee cannot report to a manager in another department";
 	}
 
-	public static final String EMPLOYEE_REST_API_BASE_URI_PATH = "/api/employees";
+	public static final String REST_API_BASE_URI_PATH = "/api";
+	public static final String EMPLOYEE_REST_API_BASE_URI_PATH = REST_API_BASE_URI_PATH + "/employees";
+	public static final String DEPARTMENT_REST_API_BASE_URI_PATH = REST_API_BASE_URI_PATH + "/departments";
 }
