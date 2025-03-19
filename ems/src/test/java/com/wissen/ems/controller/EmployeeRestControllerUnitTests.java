@@ -33,13 +33,13 @@ import com.wissen.ems.service.EmployeeService;
 public class EmployeeRestControllerUnitTests {
 	private MockMvc mockMvc;
 
+	@MockitoBean
+	private EmployeeService employeeService;
+
 	@Autowired
 	public EmployeeRestControllerUnitTests(MockMvc mockMvc) {
 		this.mockMvc = mockMvc;
 	}
-
-	@MockitoBean
-	private EmployeeService employeeService;
 
 	@Test
 	public void testCreateRegularEmployee() throws Exception {
