@@ -1,7 +1,10 @@
 package com.wissen.ems.service;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
+
+import java.util.List;
 
 import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.Test;
@@ -11,6 +14,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.wissen.ems.dto.EmployeeDetailsDTO;
+import com.wissen.ems.dto.ManagerDetailsRetrievalDTO;
 import com.wissen.ems.dto.RegularEmployeeDetailsDTO;
 import com.wissen.ems.employeecreator.EmployeeCreator;
 import com.wissen.ems.entity.Department;
@@ -73,5 +77,33 @@ public class EmployeeServiceImplUnitTests {
 
 		AssertionsForClassTypes.assertThat(savedEmployee).isNotNull();
 		AssertionsForClassTypes.assertThat(savedEmployee.getId()).isEqualTo(newEmployeeId);
+	}
+
+	@Test
+	public void testGetActiveManagersByDepartment() {
+		Employee headOfEngineering = new Employee();
+		int headOfEngineeringEmployeeId = 2;
+		headOfEngineering.setId(headOfEngineeringEmployeeId);
+
+		Employee softwareEngineeringManager = new Employee();
+		int softwareEngineeringManagerEmployeeId = 5;
+		softwareEngineeringManager.setId(softwareEngineeringManagerEmployeeId);
+
+		List<Employee> activeEngineeringManagers = List.of(headOfEngineering, softwareEngineeringManager);
+
+		when(employeeRepository.findActiveManagersByDepartment(anyInt())).thenReturn(activeEngineeringManagers);
+
+		int engineeringDepartmentId = 1;
+		List<ManagerDetailsRetrievalDTO> activeEngineeringManagersDto = employeeService.getActiveManagersByDepartment(engineeringDepartmentId);
+
+		AssertionsForClassTypes.assertThat(activeEngineeringManagersDto.size()).isEqualTo(activeEngineeringManagers.size());
+
+		for (int i = 0; i < activeEngineeringManagersDto.size(); i++) {
+			Employee activeEngineeringManager = activeEngineeringManagers.get(i);
+			ManagerDetailsRetrievalDTO activeEngineeringManagerDto = activeEngineeringManagersDto.get(i);
+
+			AssertionsForClassTypes.assertThat(activeEngineeringManagerDto.getId()).isEqualTo(activeEngineeringManager.getId());
+			AssertionsForClassTypes.assertThat(activeEngineeringManagerDto.getName()).isEqualTo(activeEngineeringManager.getName());
+		}
 	}
 }
