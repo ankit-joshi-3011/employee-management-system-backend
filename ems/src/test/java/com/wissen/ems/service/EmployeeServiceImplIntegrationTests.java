@@ -2,6 +2,8 @@ package com.wissen.ems.service;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.List;
+
 import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.wissen.ems.common.Constants.ExceptionMessages;
 import com.wissen.ems.common.Utility;
+import com.wissen.ems.dto.ManagerDetailsRetrievalDTO;
 import com.wissen.ems.dto.RegularEmployeeDetailsDTO;
 import com.wissen.ems.dto.UnsupportedEmployeeDetailsDto;
 import com.wissen.ems.entity.Employee;
@@ -108,5 +111,23 @@ public class EmployeeServiceImplIntegrationTests {
 		BusinessRuleViolationException exception = assertThrows(BusinessRuleViolationException.class, () -> employeeService.save(regularEmployeeDetailsDTO));
 
 		AssertionsForClassTypes.assertThat(exception.getMessage()).isEqualTo(ExceptionMessages.EMPLOYEE_REPORTING_TO_MANAGER_IN_ANOTHER_DEPARTMENT);
+	}
+
+	@Test
+	public void testGetActiveManagersByDepartment() {
+		int engineeringDepartmentId = 1;
+		List<ManagerDetailsRetrievalDTO> activeEngineeringManagersDto = employeeService.getActiveManagersByDepartment(engineeringDepartmentId);
+
+		int[] activeEngineeringManagerIds = new int[] { 2, 5 };
+		String[] activeEngineeringManagerNames = new String[] { "DEF", "MNO" };
+
+		AssertionsForClassTypes.assertThat(activeEngineeringManagersDto.size()).isEqualTo(activeEngineeringManagerIds.length);
+
+		for (int i = 0; i < activeEngineeringManagersDto.size(); i++) {
+			ManagerDetailsRetrievalDTO activeEngineeringManagerDto = activeEngineeringManagersDto.get(i);
+
+			AssertionsForClassTypes.assertThat(activeEngineeringManagerDto.getId()).isEqualTo(activeEngineeringManagerIds[i]);
+			AssertionsForClassTypes.assertThat(activeEngineeringManagerDto.getName()).isEqualTo(activeEngineeringManagerNames[i]);
+		}
 	}
 }
