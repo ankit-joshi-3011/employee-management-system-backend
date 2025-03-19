@@ -104,6 +104,7 @@ To run the JUnit tests included with the project, follow the below mentioned ste
    * EmployeeRestControllerIntegrationTests.java
    * EmployeeRestControllerUnitTests.java
    * EmployeeRepositoryTests.java
+   * DepartmentServiceImplIntegrationTests.java
    * DepartmentServiceImplUnitTests.java
    * EmployeeServiceImplIntegrationTests.java
    * EmployeeServiceImplUnitTests.java
