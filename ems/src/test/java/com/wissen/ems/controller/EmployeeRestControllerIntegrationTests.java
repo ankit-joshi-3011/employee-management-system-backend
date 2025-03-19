@@ -1,8 +1,11 @@
 package com.wissen.ems.controller;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.List;
 
 import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.Test;
@@ -19,9 +22,11 @@ import org.springframework.test.web.servlet.ResultMatcher;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wissen.ems.common.Constants;
+import com.wissen.ems.common.TestUtility;
 import com.wissen.ems.common.Constants.ExceptionMessages;
 import com.wissen.ems.common.Utility;
 import com.wissen.ems.dto.EmployeeDetailsDTO;
+import com.wissen.ems.dto.ManagerDetailsRetrievalDTO;
 import com.wissen.ems.dto.RegularEmployeeDetailsDTO;
 import com.wissen.ems.dto.UnsupportedEmployeeDetailsDto;
 
@@ -34,10 +39,12 @@ import jakarta.transaction.Transactional;
 @Transactional
 public class EmployeeRestControllerIntegrationTests {
 	private MockMvc mockMvc;
+	private ObjectMapper objectMapper;
 
 	@Autowired
-	public EmployeeRestControllerIntegrationTests(MockMvc mockMvc) {
+	public EmployeeRestControllerIntegrationTests(MockMvc mockMvc, ObjectMapper objectMapper) {
 		this.mockMvc = mockMvc;
+		this.objectMapper = objectMapper;
 	}
 
 	@Test
@@ -140,5 +147,22 @@ public class EmployeeRestControllerIntegrationTests {
 		String responseBody = result.getResponse().getContentAsString();
 
 		AssertionsForClassTypes.assertThat(responseBody).isEqualTo(errorMessage);
+	}
+
+	@Test
+	public void testGetActiveManagersByDepartment() throws Exception {
+		int engineeringDepartmentId = 1;
+
+		MvcResult result = mockMvc.perform(get(Constants.EMPLOYEE_REST_API_BASE_URI_PATH + Constants.RETRIEVE_ACTIVE_MANAGERS_BY_DEPARTMENT_API_URI_PATH)
+			.param("departmentId", String.valueOf(engineeringDepartmentId))
+			.contentType(MediaType.APPLICATION_JSON))
+			.andExpect(status().isOk())
+			.andReturn();
+
+		String jsonResponse = result.getResponse().getContentAsString();
+		List<ManagerDetailsRetrievalDTO> responseActiveEngineeringManagersDto = objectMapper.readValue(jsonResponse, objectMapper.getTypeFactory().constructCollectionType(List.class, ManagerDetailsRetrievalDTO.class));
+
+		TestUtility.assertManagerDetailsRetrievalDtosAreCorrect(responseActiveEngineeringManagersDto);
+
 	}
 }
